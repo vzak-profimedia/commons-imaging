@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -222,8 +224,14 @@ public class JpegIptcRewriter extends JpegRewriter {
     public void writeIPTC(final byte[] src, final OutputStream os,
             final PhotoshopApp13Data newData) throws ImageReadException, IOException,
             ImageWriteException {
+        writeIPTC(src, os, newData, StandardCharsets.UTF_8);
+    }
+
+    public void writeIPTC(final byte[] src, final OutputStream os,
+                          final PhotoshopApp13Data newData, Charset charset) throws ImageReadException, IOException,
+            ImageWriteException {
         final ByteSource byteSource = new ByteSourceArray(src);
-        writeIPTC(byteSource, os, newData);
+        writeIPTC(byteSource, os, newData, charset);
     }
 
     /**
@@ -241,8 +249,14 @@ public class JpegIptcRewriter extends JpegRewriter {
     public void writeIPTC(final InputStream src, final OutputStream os,
             final PhotoshopApp13Data newData) throws ImageReadException, IOException,
             ImageWriteException {
+        writeIPTC(src, os, newData, StandardCharsets.UTF_8);
+    }
+
+    public void writeIPTC(final InputStream src, final OutputStream os,
+                          final PhotoshopApp13Data newData, Charset charset) throws ImageReadException, IOException,
+            ImageWriteException {
         final ByteSource byteSource = new ByteSourceInputStream(src, null);
-        writeIPTC(byteSource, os, newData);
+        writeIPTC(byteSource, os, newData, charset);
     }
 
     /**
@@ -260,7 +274,13 @@ public class JpegIptcRewriter extends JpegRewriter {
     public void writeIPTC(final File src, final OutputStream os, final PhotoshopApp13Data newData)
             throws ImageReadException, IOException, ImageWriteException {
         final ByteSource byteSource = new ByteSourceFile(src);
-        writeIPTC(byteSource, os, newData);
+        writeIPTC(src, os, newData, StandardCharsets.UTF_8);
+    }
+
+    public void writeIPTC(final File src, final OutputStream os, final PhotoshopApp13Data newData, Charset charset)
+            throws ImageReadException, IOException, ImageWriteException {
+        final ByteSource byteSource = new ByteSourceFile(src);
+        writeIPTC(byteSource, os, newData, charset);
     }
 
     /**
@@ -278,6 +298,12 @@ public class JpegIptcRewriter extends JpegRewriter {
     public void writeIPTC(final ByteSource byteSource, final OutputStream os,
             PhotoshopApp13Data newData) throws ImageReadException, IOException,
             ImageWriteException {
+        writeIPTC(byteSource, os, newData, StandardCharsets.UTF_8);
+    }
+
+    public void writeIPTC(final ByteSource byteSource, final OutputStream os,
+                          PhotoshopApp13Data newData, Charset charset) throws ImageReadException, IOException,
+            ImageWriteException {
         final JFIFPieces jfifPieces = analyzeJFIF(byteSource);
         final List<JFIFPiece> oldPieces = jfifPieces.pieces;
         final List<JFIFPiece> photoshopApp13Segments = findPhotoshopApp13Segments(oldPieces);
@@ -291,7 +317,7 @@ public class JpegIptcRewriter extends JpegRewriter {
         {
             // discard old iptc blocks.
             final List<IptcBlock> newBlocks = newData.getNonIptcBlocks();
-            final byte[] newBlockBytes = new IptcParser().writeIPTCBlock(newData.getRecords());
+            final byte[] newBlockBytes = new IptcParser().writeIPTCBlock(newData.getRecords(), charset);
 
             final int blockType = IptcConstants.IMAGE_RESOURCE_BLOCK_IPTC_DATA;
             final byte[] blockNameBytes = new byte[0];

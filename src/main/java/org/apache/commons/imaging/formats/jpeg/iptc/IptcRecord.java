@@ -16,6 +16,7 @@
  */
 package org.apache.commons.imaging.formats.jpeg.iptc;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Comparator;
 
 /*
@@ -24,6 +25,8 @@ import java.util.Comparator;
 public class IptcRecord {
     public final IptcType iptcType;
     private final String value;
+    private final byte[] bytes;
+
     public static final Comparator<IptcRecord> COMPARATOR = new Comparator<IptcRecord>() {
         @Override
         public int compare(final IptcRecord e1, final IptcRecord e2) {
@@ -32,7 +35,18 @@ public class IptcRecord {
     };
 
     public IptcRecord(final IptcType iptcType, final String value) {
+        this(iptcType, value, "UTF-8");
+    }
+
+    public IptcRecord(final IptcType iptcType, final String value, final String charsetName) {
         this.iptcType = iptcType;
+        byte[] tempBytes;
+        try {
+            tempBytes = value.getBytes(charsetName);
+        } catch (final UnsupportedEncodingException cannotHappen) {
+            tempBytes = null;
+        }
+        this.bytes = tempBytes;
         this.value = value;
     }
 
@@ -42,5 +56,9 @@ public class IptcRecord {
 
     public String getIptcTypeName() {
         return iptcType.getName();
+    }
+
+    public byte[] getRawBytes() {
+        return bytes.clone();
     }
 }

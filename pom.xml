@@ -33,7 +33,7 @@
   <artifactId>commons-imaging</artifactId>
   <name>Apache Commons Imaging</name>
 
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.0001</version>
 
   <!--
     Keep the description on a single line. Otherwise Maven might generate
@@ -249,83 +249,83 @@
           <excludeFilterFile>${basedir}/src/conf/findbugs-exclude-filter.xml</excludeFilterFile>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>javancss-maven-plugin</artifactId>
-        <version>2.1</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-changes-plugin</artifactId>
-        <version>${commons.changes.version}</version>
-        <configuration>
-          <issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>
-        </configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>changes-report</report>
-              <report>jira-report</report>
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.9.0</version>
-        <configuration>
-          <targetJdk>${maven.compiler.target}</targetJdk>
-          <rulesets>
-            <ruleset>${basedir}/src/conf/pmd-ruleset.xml</ruleset>
-          </rulesets>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>taglist-maven-plugin</artifactId>
-        <version>2.4</version>
-        <configuration>
-          <tagListOptions>
-            <tagClasses>
-              <tagClass>
-                <displayName>Needs Work</displayName>
-                <tags>
-                  <tag>
-                    <matchString>TODO</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                  <tag>
-                    <matchString>FIXME</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                  <tag>
-                    <matchString>XXX</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                </tags>
-              </tagClass>
-              <tagClass>
-                <displayName>Noteable Markers</displayName>
-                <tags>
-                  <tag>
-                    <matchString>NOTE</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                  <tag>
-                    <matchString>NOPMD</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                  <tag>
-                    <matchString>NOSONAR</matchString>
-                    <matchType>exact</matchType>
-                  </tag>
-                </tags>
-              </tagClass>
-            </tagClasses>
-          </tagListOptions>
-        </configuration>
-      </plugin>
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>javancss-maven-plugin</artifactId>-->
+        <!--<version>2.1</version>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-changes-plugin</artifactId>-->
+        <!--<version>${commons.changes.version}</version>-->
+        <!--<configuration>-->
+          <!--<issueLinkTemplate>%URL%/%ISSUE%</issueLinkTemplate>-->
+        <!--</configuration>-->
+        <!--<reportSets>-->
+          <!--<reportSet>-->
+            <!--<reports>-->
+              <!--<report>changes-report</report>-->
+              <!--<report>jira-report</report>-->
+            <!--</reports>-->
+          <!--</reportSet>-->
+        <!--</reportSets>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.apache.maven.plugins</groupId>-->
+        <!--<artifactId>maven-pmd-plugin</artifactId>-->
+        <!--<version>3.9.0</version>-->
+        <!--<configuration>-->
+          <!--<targetJdk>${maven.compiler.target}</targetJdk>-->
+          <!--<rulesets>-->
+            <!--<ruleset>${basedir}/src/conf/pmd-ruleset.xml</ruleset>-->
+          <!--</rulesets>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
+      <!--<plugin>-->
+        <!--<groupId>org.codehaus.mojo</groupId>-->
+        <!--<artifactId>taglist-maven-plugin</artifactId>-->
+        <!--<version>2.4</version>-->
+        <!--<configuration>-->
+          <!--<tagListOptions>-->
+            <!--<tagClasses>-->
+              <!--<tagClass>-->
+                <!--<displayName>Needs Work</displayName>-->
+                <!--<tags>-->
+                  <!--<tag>-->
+                    <!--<matchString>TODO</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                  <!--<tag>-->
+                    <!--<matchString>FIXME</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                  <!--<tag>-->
+                    <!--<matchString>XXX</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                <!--</tags>-->
+              <!--</tagClass>-->
+              <!--<tagClass>-->
+                <!--<displayName>Noteable Markers</displayName>-->
+                <!--<tags>-->
+                  <!--<tag>-->
+                    <!--<matchString>NOTE</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                  <!--<tag>-->
+                    <!--<matchString>NOPMD</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                  <!--<tag>-->
+                    <!--<matchString>NOSONAR</matchString>-->
+                    <!--<matchType>exact</matchType>-->
+                  <!--</tag>-->
+                <!--</tags>-->
+              <!--</tagClass>-->
+            <!--</tagClasses>-->
+          <!--</tagListOptions>-->
+        <!--</configuration>-->
+      <!--</plugin>-->
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
